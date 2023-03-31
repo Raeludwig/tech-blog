@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
     const projects = projectData.map((project) => project.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      projects, 
-      logged_in: req.session.logged_in 
+    res.render('homepage', {
+      projects,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -58,6 +58,31 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+
+router.get('/profile', async (req, res) => {
+  try {
+    const projectData = await Project.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+
+      include: {
+        model: User,
+      },
+    })
+    const projects = projectData.map((project) => project.get({ plain: true }));
+    console.log(projects)
+    if (req.session.logged_in) {
+      res.render('profile', { projects });
+      return;
+    }
+
+    res.render('login');
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
