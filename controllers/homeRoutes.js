@@ -81,8 +81,24 @@ router.get('/profile', async (req, res) => {
 
     res.render('login');
   } catch (err) {
+  
     res.status(500).json(err);
   }
 });
+
+router.get('/logout', (req, res) => {
+  // Destroy the session to log out the user
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).json(err);
+      return;
+    }
+    // Redirect to the homepage after logging out
+    res.redirect('/');
+  });
+});
+
+
+
 
 module.exports = router;

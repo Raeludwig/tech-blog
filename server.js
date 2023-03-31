@@ -32,6 +32,12 @@ const sess = {
 
 app.use(session(sess));
 
+// Middleware to set `loggedIn` variable in response locals object
+app.use((req, res, next) => {
+  res.locals.loggedIn = req.session.logged_in;
+  next();
+});
+
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
