@@ -75,7 +75,7 @@ router.get('/profile', async (req, res) => {
     const projects = projectData.map((project) => project.get({ plain: true }));
     console.log(projects)
     if (req.session.logged_in) {
-      res.render('profile', { projects });
+      res.render('profile', { projects, logged_in: req.session.logged_in});
       return;
     }
 
