@@ -1,14 +1,25 @@
 <div class="text-center">
   <h2>{{name}}</h2>
-  {{!-- <p>{{{get_emoji}}}</p> --}}
   <p>{{description}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
+ 
   <p>
-    {{!-- <span for="img" aria-label="money">💲</span>
-    <span class="dollar-amount">{{format_amount needed_funding}}</span>
-    needed --}}
-  </p>
-  <p>
-    <button class="btn btn-primary">Fund this Project!</button>
+    <div class="form edit-blogpost-form">
+      <div class="form-group">
+        <input type="hidden" id="blogpost-id" name="blogpost-id" value="{{id}}" />
+        <label for="blogpost-name">Blogpost name:</label>
+        <input placeholder="{{name}}" class="form-input" type="text" id="blogpost-name" name="blogpost-name" />
+      </div>
+      
+      <div class="form-group">
+        <label for="blogpost-desc">description:</label>
+        <textarea placeholder="{{description}}" class="form-input" id="blogpost-desc" name="blogpost-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary edit">Update</button>
+      </div>
+    </div>
+  </div>
   </p>
 </div>
+<script src="/js/edit.js"></script>
